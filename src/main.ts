@@ -11,11 +11,12 @@ async function bootstrap() {
   // Request Validation
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe());
 
   // Helmet Middleware against known security vulnerabilities
   app.use(helmet());
-  app.setGlobalPrefix('api/v1')
+  app.enableCors();
+  app.setGlobalPrefix('api/v1');
 
   // Swagger API Documentation
   const options = new DocumentBuilder()

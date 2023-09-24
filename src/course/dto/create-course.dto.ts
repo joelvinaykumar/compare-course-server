@@ -1,6 +1,13 @@
-import { Type } from "class-transformer";
-import { IsArray, IsEnum, IsInt, IsNumber, IsOptional, IsString, Max, MaxLength, Min } from "class-validator";
-import { ClassTypes, CourseType, CourseMode } from "../entities/course.enum";
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsBoolean,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { ClassTypes, CourseType, CourseMode } from '../entities/course.enum';
 
 class InstructorDto {
   @IsString()
@@ -11,49 +18,20 @@ class InstructorDto {
   picture?: string;
 }
 
-class RatingDto {
-  @IsInt()
-  @Min(1)
-  @Max(5)
-  course_teaching?: number;
-
-  @IsInt()
-  @Min(1)
-  @Max(5)
-  content: number;
-
-  @IsInt()
-  @Min(1)
-  @Max(5)
-  material?: number;
-
-  @IsInt()
-  @Min(1)
-  @Max(5)
-  faculty?: number;
-
-  @IsInt()
-  @Min(1)
-  @Max(5)
-  placement?: number;
-
-
-  @IsString()
-  comment?: string;
-}
-
 export class CreateCourseDto {
   @IsString()
   title: string;
 
   @IsString()
-  @MaxLength(200)
   description: string;
+
+  @IsString()
+  thumbnail: string;
 
   @IsNumber()
   @IsOptional()
   average_rating?: number;
-  
+
   @IsEnum(ClassTypes)
   @IsOptional()
   class_type?: ClassTypes;
@@ -75,9 +53,27 @@ export class CreateCourseDto {
   @IsOptional()
   link?: string;
 
+  @IsString()
+  @IsOptional()
+  company?: string;
+
   @IsArray()
   @IsOptional()
   curricuulum?: string[];
+
+  @IsNumber()
+  @IsOptional()
+  price?: number;
+
+  @IsNumber()
+  @IsOptional()
+  no_of_hours?: number;
+
+  @IsBoolean()
+  @IsOptional()
+  provides_support?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  provides_certificate?: boolean;
 }
-
-

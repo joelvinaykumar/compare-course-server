@@ -1,5 +1,10 @@
-export enum UserRole{
-  User="user",
-  Admin="Admin",
-  Hybrid="Hybrid"
+export enum UserDtoRole {
+  User = 'User',
+  Admin = 'Admin',
+}
+
+export enum UserRole {
+  User = 'User',
+  Admin = 'Admin',
+  SuperAdmin = 'SuperAdmin',
 }

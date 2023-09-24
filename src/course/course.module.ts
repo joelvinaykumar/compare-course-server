@@ -9,10 +9,10 @@ import { ModelNames } from 'src/common/models.enum';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      { name : ModelNames.Course, schema : CourseSchema },
+      { name: ModelNames.Course, schema: CourseSchema },
     ]),
   ],
   controllers: [CourseController],
-  providers: [CourseService]
+  providers: [CourseService],
 })
 export class CourseModule {}

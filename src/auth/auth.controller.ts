@@ -1,16 +1,41 @@
-import { Controller, Get, UseGuards, Request } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  UseGuards,
+  Request,
+  Logger,
+  Response,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from './guards/jwt.guard';
+import { LinkedInAuthGuard } from './guards/linkedin.guard';
 
 @Controller()
 @ApiTags('Auth')
 export class AuthController {
-
   @Get('me')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Get('auth/linkedin')
+  @ApiBearerAuth()
+  @UseGuards(LinkedInAuthGuard)
+  loginWithLinkedIn(@Request() req) {
+    Logger.log('here', 'linkedin');
+    return req.user;
+  }
+
+  @Get('auth/linkedin/callback')
+  @ApiBearerAuth()
+  @UseGuards(LinkedInAuthGuard)
+  loginWithLinkedInCallback(@Request() req, @Response() res) {
+    Logger.log(req.user, 'response');
+    return res.redirect(
+      `http://localhost:3000/auth/callback?access_token=${req.user?.access_token}`,
+    );
   }
 }
