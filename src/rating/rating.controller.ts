@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RatingService } from './rating.service';
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
-import { User } from 'src/auth/user.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { User } from '../auth/user.decorator';
 import { CreateRatingDto } from './dto/create-rating.dto';
 
 @ApiTags('Rating')

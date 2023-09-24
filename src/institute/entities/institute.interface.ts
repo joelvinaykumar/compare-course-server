@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
-import { Course } from 'src/course/entities/course.interface';
-import { User } from 'src/user/entities/user.interface';
+import { Course } from '../../course/entities/course.interface';
+import { User } from '../../user/entities/user.interface';
 import { InstituteMode, InstituteType } from './institute.enum';
 
 interface Faculty extends Document {

@@ -5,7 +5,7 @@ import { Model, QueryOptions } from 'mongoose';
 import { Course } from './entities/course.interface';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { ModelNames } from 'src/common/models.enum';
+import { ModelNames } from '../common/models.enum';
 import { FilterCourseDto } from './dto/filter-course.dto';
 
 @Injectable()

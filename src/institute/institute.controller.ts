@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { InstituteService } from './institute.service';
 import { CreateInstituteDto } from './dto/create-institute.dto';
 import { UpdateInstituteDto } from './dto/update-institute.dto';
@@ -21,9 +21,9 @@ import {
   FilterInstituteDto,
   FilterInstituteLiteDto,
 } from './dto/filter-institute.dto';
-import { RolesGuard } from 'src/auth/guards/role.guard';
-import { Roles } from 'src/auth/roles.decorator';
-import { UserRole } from 'src/user/entities/user.enum';
+import { RolesGuard } from '../auth/guards/role.guard';
+import { Roles } from '../auth/roles.decorator';
+import { UserRole } from '../user/entities/user.enum';
 
 @Controller('institute')
 @ApiTags('Institute')

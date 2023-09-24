@@ -7,9 +7,9 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 
-import { LocalAuthGuard } from 'src/auth/guards/local-auth.guard';
+import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 import { CreateUsereDto } from './entities/user.dto';
 import { UserService } from './user.service';
 

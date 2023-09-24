@@ -2,11 +2,11 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { ModelNames } from 'src/common/models.enum';
+import { ModelNames } from '../common/models.enum';
 import { Rating } from './entities/rating.interface';
-import { User } from 'src/user/entities/user.interface';
+import { User } from '../user/entities/user.interface';
 import { CreateRatingDto } from './dto/create-rating.dto';
-import { CourseService } from 'src/course/course.service';
+import { CourseService } from '../course/course.service';
 
 @Injectable()
 export class RatingService {

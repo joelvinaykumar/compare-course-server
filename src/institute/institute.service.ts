@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { generate } from 'generate-password';
 
-import { ModelNames } from 'src/common/models.enum';
+import { ModelNames } from '../common/models.enum';
 import { Institute } from './entities/institute.interface';
 import { CreateInstituteDto } from './dto/create-institute.dto';
 import { UpdateInstituteDto } from './dto/update-institute.dto';
@@ -11,8 +11,8 @@ import {
   FilterInstituteDto,
   FilterInstituteLiteDto,
 } from './dto/filter-institute.dto';
-import { UserRole } from 'src/user/entities/user.enum';
-import { UserService } from 'src/user/user.service';
+import { UserRole } from '../user/entities/user.enum';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class InstituteService {

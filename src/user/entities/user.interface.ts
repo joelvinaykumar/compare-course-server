@@ -1,5 +1,5 @@
 import { Document } from 'mongoose';
-import { Institute } from 'src/institute/entities/institute.interface';
+import { Institute } from '../../institute/entities/institute.interface';
 import { UserRole } from './user.enum';
 
 export interface User extends Document {

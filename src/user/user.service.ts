@@ -1,7 +1,6 @@
 import {
   HttpException,
   Injectable,
-  Logger,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -12,7 +11,7 @@ import { Model } from 'mongoose';
 
 import { User } from './entities/user.interface';
 import { CreateUsereDto } from './entities/user.dto';
-import { ModelNames } from 'src/common/models.enum';
+import { ModelNames } from '../common/models.enum';
 import { UserRole } from './entities/user.enum';
 
 @Injectable()

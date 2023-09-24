@@ -4,9 +4,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { InstituteService } from './institute.service';
 import { CourseController } from './institute.controller';
 import { InstituteSchema } from './entities/institute.schema';
-import { ModelNames } from 'src/common/models.enum';
-import { UserSchema } from 'src/user/entities/user.schema';
-import { UserModule } from 'src/user/user.module';
+import { ModelNames } from '../common/models.enum';
+import { UserSchema } from '../user/entities/user.schema';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [

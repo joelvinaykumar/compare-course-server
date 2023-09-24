@@ -11,10 +11,10 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
-import { Roles } from 'src/auth/roles.decorator';
-import { User } from 'src/auth/user.decorator';
-import { UserRole } from 'src/user/entities/user.enum';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { Roles } from '../auth/roles.decorator';
+import { User } from '../auth/user.decorator';
+import { UserRole } from '../user/entities/user.enum';
 import { CourseService } from './course.service';
 import {
   CreateCourseDto,

@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { ModelNames } from 'src/common/models.enum';
+import { ModelNames } from '../../common/models.enum';
 import { InstituteMode, InstituteType } from './institute.enum';
 
 const FacultySchema = new Schema({

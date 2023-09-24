@@ -1,4 +1,4 @@
 export enum User {
   user = 'user',
-  institute = 'Institute'
+  institute = 'Institute',
 }

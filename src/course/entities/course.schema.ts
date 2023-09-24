@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { ModelNames } from 'src/common/models.enum';
+import { ModelNames } from '../../common/models.enum';
 import { ClassTypes, CourseMode, CourseType } from './course.enum';
 
 const AuthorSchema = new Schema({
