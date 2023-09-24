@@ -1,5 +1,14 @@
-import { Type } from "class-transformer";
-import { IsArray, IsBoolean, IsOptional, IsString, MaxLength, ValidateNested } from "class-validator";
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsBoolean,
+  IsEnum,
+  IsOptional,
+  IsString,
+  MaxLength,
+  ValidateNested,
+} from 'class-validator';
+import { InstituteMode, InstituteType } from '../entities/institute.enum';
 
 class FacultyDto {
   @IsString()
@@ -12,7 +21,23 @@ class FacultyDto {
 
 export class CreateInstituteDto {
   @IsString()
+  adminName: string;
+
+  @IsString()
+  adminEmail: string;
+
+  @IsString()
   name: string;
+
+  @IsString()
+  @IsOptional()
+  logo?: string;
+
+  @IsEnum(InstituteType)
+  type: string;
+
+  @IsEnum(InstituteMode, { each: true })
+  mode: string[];
 
   @IsString()
   @IsOptional()
@@ -29,4 +54,3 @@ export class CreateInstituteDto {
   @IsOptional()
   active?: boolean;
 }
-

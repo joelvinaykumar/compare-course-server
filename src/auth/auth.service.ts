@@ -1,20 +1,13 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { User } from '../common/user.enum';
 
 @Injectable()
 export class AuthService {
-
-  constructor(
-  ) {}
-  
-  async login(role: User, input: any) {
-    const { name, email, imageUrl } = input?.profileObj
+  async login() {
     try {
       // Find User
       // Sign JWT and repsond
     } catch (e: any) {
-      return new HttpException(e.message, 400)
+      return new HttpException(e.message, 400);
     }
   }
 

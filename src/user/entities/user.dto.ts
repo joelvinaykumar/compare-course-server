@@ -1,5 +1,6 @@
-import { PartialType } from "@nestjs/swagger";
-import { IsEmail, IsString } from "class-validator";
+import { PartialType } from '@nestjs/swagger';
+import { IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
+import { UserDtoRole } from './user.enum';
 
 export class CreateUsereDto {
   @IsEmail()
@@ -8,6 +9,17 @@ export class CreateUsereDto {
 
   @IsString()
   name: string;
+
+  @IsString()
+  @IsOptional()
+  picture?: string;
+
+  @IsEnum(UserDtoRole)
+  role: string;
+
+  @IsString()
+  @IsOptional()
+  organization?: string;
 
   @IsString()
   password: string;

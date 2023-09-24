@@ -1,11 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, QueryOptions } from 'mongoose';
 
 import { Course } from './entities/course.interface';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { ModelNames } from 'src/common/models.enum';
+import { ModelNames } from '../common/models.enum';
+import { FilterCourseDto } from './dto/filter-course.dto';
 
 @Injectable()
 export class CourseService {
@@ -23,9 +24,41 @@ export class CourseService {
     }
   }
 
-  async findAll() {
+  async findAll(user: any, query?: FilterCourseDto) {
     try {
-      return await this.courseModel.find();
+      let q: any = {};
+      if (query?.title) {
+        q = { $regex: new RegExp(query.title, 'i') };
+      }
+      if (query?.type) {
+        q = { ...query, type: query.type };
+      }
+      if (query?.company) {
+        q = { ...query, company: query.company };
+      }
+      console.log(q);
+      return await this.courseModel.find({
+        ...q,
+      });
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async findAllLite(user: any, query?: FilterCourseDto) {
+    try {
+      let q: any = {};
+      if (query?.title) {
+        q = { $regex: new RegExp(query.title, 'i') };
+      }
+      if (query?.company) {
+        q = { ...query, company: query.company };
+      }
+      return await this.courseModel
+        .find({
+          ...q,
+        })
+        .select(['_id', 'title']);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -39,9 +72,9 @@ export class CourseService {
     }
   }
 
-  async update(id: string, input: UpdateCourseDto) {
+  async update(id: string, input: UpdateCourseDto & QueryOptions<Course>) {
     try {
-      return await this.courseModel.findByIdAndUpdate(id, input);
+      return await this.courseModel.findByIdAndUpdate(id, input, { new: true });
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
