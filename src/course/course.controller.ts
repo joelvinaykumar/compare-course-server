@@ -43,7 +43,6 @@ export class CourseController {
   }
 
   @Get('lite')
-  @UseGuards(JwtAuthGuard)
   findAllLite(@User() user: any, @Query() query?: FilterCourseLiteDto) {
     return this.courseService.findAllLite(user, query);
   }
