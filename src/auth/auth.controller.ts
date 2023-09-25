@@ -10,10 +10,13 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from './guards/jwt.guard';
 import { LinkedInAuthGuard } from './guards/linkedin.guard';
+import { ConfigService } from '@nestjs/config';
 
 @Controller()
 @ApiTags('Auth')
 export class AuthController {
+  constructor(private readonly cfgService: ConfigService) {}
+
   @Get('me')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
@@ -35,7 +38,9 @@ export class AuthController {
   loginWithLinkedInCallback(@Request() req, @Response() res) {
     Logger.log(req.user, 'response');
     return res.redirect(
-      `http://localhost:3000/auth/callback?access_token=${req.user?.access_token}`,
+      `${this.cfgService.get('FRONTEND_HOST')}/auth/callback?access_token=${
+        req.user?.access_token
+      }`,
     );
   }
 }
