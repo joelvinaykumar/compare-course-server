@@ -15,8 +15,12 @@
         "POST",
         "PATCH",
         "PUT",
-        "DELETE"
-      ]
+        "DELETE",
+        "OPTIONS"
+      ],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
     }
   ]
 }
