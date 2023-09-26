@@ -1,3 +1,5 @@
+import { Document } from 'mongodb';
+
 export interface Rating extends Document {
   readonly _id: string;
   readonly overall?: number;
