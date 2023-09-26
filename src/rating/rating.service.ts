@@ -7,6 +7,7 @@ import { Rating } from './entities/rating.interface';
 import { User } from '../user/entities/user.interface';
 import { CreateRatingDto } from './dto/create-rating.dto';
 import { CourseService } from '../course/course.service';
+import { FilterRatingDto } from './dto/filter-review.dto';
 
 @Injectable()
 export class RatingService {
@@ -33,11 +34,19 @@ export class RatingService {
     }
   }
 
-  async findAll(user: User) {
+  async findAll(user: User, query: FilterRatingDto) {
     try {
-      return await this.ratingModel.find({
-        created_by: user.id,
-      });
+      let q: any = {};
+      if (query.type === 'user') {
+        q = { ...q, created_by: user.id };
+      }
+      if (query.type === 'course') {
+        q = { ...q, course: query.id };
+      }
+      if (query.type === 'company') {
+        q = { ...q, company: query.id };
+      }
+      return await this.ratingModel.find(q);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

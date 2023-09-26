@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { RatingController } from './rating.controller';
@@ -18,6 +18,6 @@ import { CourseService } from '../course/course.service';
     CourseModule,
   ],
   controllers: [RatingController],
-  providers: [RatingService, CourseService],
+  providers: [RatingService, CourseService, Logger],
 })
 export class RatingModule {}

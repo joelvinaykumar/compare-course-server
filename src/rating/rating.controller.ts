@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RatingService } from './rating.service';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { User } from '../auth/user.decorator';
 import { CreateRatingDto } from './dto/create-rating.dto';
+import { FilterRatingDto } from './dto/filter-review.dto';
+import { User as UserType } from '../user/entities/user.interface';
 
 @ApiTags('Rating')
 @ApiBearerAuth()
@@ -19,7 +21,7 @@ export class RatingController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll(@User() user: any) {
-    return this.ratingService.findAll(user);
+  findAll(@User() user: UserType, @Query() query: FilterRatingDto) {
+    return this.ratingService.findAll(user, query);
   }
 }
