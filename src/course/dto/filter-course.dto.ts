@@ -14,17 +14,21 @@ export class FilterCourseDto {
   @IsOptional()
   institutes?: string[];
 
-  @IsEnum(ClassTypes)
   @IsOptional()
-  classType?: string;
+  @IsEnum(ClassTypes, { each: true })
+  classType?: ClassTypes[];
 
-  @IsEnum(CourseType)
   @IsOptional()
-  type?: string;
+  @IsEnum(CourseType, { each: true })
+  type?: CourseType[];
 
-  @IsEnum(CourseMode)
   @IsOptional()
-  mode?: string;
+  @IsEnum(CourseMode, { each: true })
+  mode?: CourseMode[];
+
+  @IsOptional()
+  @IsString()
+  rating?: string;
 }
 
 export class FilterCourseLiteDto {

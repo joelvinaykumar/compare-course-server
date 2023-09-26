@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, QueryOptions } from 'mongoose';
 
@@ -13,7 +13,10 @@ export class CourseService {
   constructor(
     @InjectModel(ModelNames.Course)
     private courseModel: Model<Course>,
-  ) {}
+    private logger: Logger,
+  ) {
+    this.logger = new Logger(CourseService.name);
+  }
 
   async create(input: CreateCourseDto) {
     try {
@@ -37,6 +40,36 @@ export class CourseService {
         q = { ...query, company: query.company };
       }
       console.log(q);
+      return await this.courseModel.find({
+        ...q,
+      });
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async findAllPublic(query?: FilterCourseDto) {
+    try {
+      let q: any = {};
+      if (query?.title) {
+        q = { $regex: new RegExp(query.title, 'i') };
+      }
+      if (query?.type) {
+        q = { ...query, type: { $in: query.type } };
+      }
+      if (query?.classType) {
+        q = { ...query, class_type: { $in: query.classType } };
+      }
+      if (query?.mode) {
+        q = { ...query, mode: { $in: query.mode } };
+      }
+      if (query?.rating) {
+        q = { ...query, average_rating: { $lte: Number(query.rating) } };
+      }
+      if (query?.company) {
+        q = { ...query, company: query.company };
+      }
+      this.logger.log(JSON.stringify(q));
       return await this.courseModel.find({
         ...q,
       });

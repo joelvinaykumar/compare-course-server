@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { CourseService } from './course.service';
@@ -13,6 +13,6 @@ import { ModelNames } from '../common/models.enum';
     ]),
   ],
   controllers: [CourseController],
-  providers: [CourseService],
+  providers: [CourseService, Logger],
 })
 export class CourseModule {}
