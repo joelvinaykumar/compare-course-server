@@ -47,6 +47,11 @@ export class CourseController {
     return this.courseService.findAllPublic(query);
   }
 
+  @Get('home')
+  findAllHome() {
+    return this.courseService.findAllHome();
+  }
+
   @Get('lite')
   findAllLite(@User() user: any, @Query() query?: FilterCourseLiteDto) {
     return this.courseService.findAllLite(user, query);

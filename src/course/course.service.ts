@@ -52,27 +52,35 @@ export class CourseService {
     try {
       let q: any = {};
       if (query?.title) {
-        q = { $regex: new RegExp(query.title, 'i') };
+        q = { title: { $regex: new RegExp(query.title, 'i') } };
       }
       if (query?.type) {
-        q = { ...query, type: { $in: query.type } };
+        q = { ...q, type: { $in: query.type } };
       }
       if (query?.classType) {
-        q = { ...query, class_type: { $in: query.classType } };
+        q = { ...q, class_type: { $in: query.classType } };
       }
       if (query?.mode) {
-        q = { ...query, mode: { $in: query.mode } };
+        q = { ...q, mode: { $in: query.mode } };
       }
       if (query?.rating) {
-        q = { ...query, average_rating: { $lte: Number(query.rating) } };
+        q = { ...q, average_rating: { $lte: Number(query.rating) } };
       }
       if (query?.company) {
-        q = { ...query, company: query.company };
+        q = { ...q, company: query.company };
       }
       this.logger.log(JSON.stringify(q));
-      return await this.courseModel.find({
-        ...q,
-      });
+      return await this.courseModel.find(q);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  async findAllHome() {
+    try {
+      return await this.courseModel
+        .find()
+        .select(['_id', 'thumbnail', 'title', 'ratings']);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
