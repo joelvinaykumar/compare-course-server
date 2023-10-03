@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -21,7 +21,10 @@ export class RatingService {
     try {
       let q: any = { ...input };
       if (!input.anonymous) {
-        q = { ...q, created_by: user.id };
+        q = {
+          ...q,
+          created_by: { id: user.id, name: user.name, picture: user.picture },
+        };
       }
       const newRating = await this.ratingModel.create(q);
       const res = await newRating.save();
@@ -38,7 +41,7 @@ export class RatingService {
     try {
       let q: any = {};
       if (query.type === 'user') {
-        q = { ...q, created_by: user.id };
+        q = { ...q, created_by: query.id };
       }
       if (query.type === 'course') {
         q = { ...q, course: query.id };
@@ -46,6 +49,7 @@ export class RatingService {
       if (query.type === 'company') {
         q = { ...q, company: query.id };
       }
+      Logger.log(JSON.stringify(q));
       return await this.ratingModel.find(q);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
